@@ -1,0 +1,10 @@
+{
+  "extensionDescription": {
+    "message": "Learn about the filter bubble! Explore what others see on popular online platforms!",
+    "description": "Description of the extension."
+  },
+  "newItemsTitle": {
+    "message": "Suggestions for First-time Visitors",
+    "description": "Header of the unpersonalised video suggestions."
+  }
+}

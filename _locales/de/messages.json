@@ -1,0 +1,10 @@
+{
+  "extensionDescription": {
+    "message": "Entflüchte der Filter-Bubble - Sieh, was Andere auf bekannten Internetportalen sehen!",
+    "description": "Description of the extension."
+  },
+  "newItemsTitle": {
+    "message": "Vorschläge für Erst-Besucher",
+    "description": "Header of the unpersonalised video suggestions."
+  }
+}
