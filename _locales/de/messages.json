@@ -4,7 +4,7 @@
     "description": "Description of the extension."
   },
   "newItemsTitle": {
-    "message": "Vorschläge für Erst-Besucher",
+    "message": "Vorschläge eines Erst-Besuchers",
     "description": "Header of the unpersonalised video suggestions."
   }
 }

@@ -1,61 +1,56 @@
 console.log('Booting IdentiSwap..');
-console.log('maxResults: ' + maxResults); // Output maxResults, injected from loaded.js
-console.log('newItemsTitle: ' + newItemsTitle); // Output newItemsTitle, injected from loaded.js
+console.log('maxResults: ' + maxResults); // maxResults setting, injected from loader.js
+console.log('newItemsTitle: ' + newItemsTitle); // newItemsTitle localisation, injected from loader.js
 
-// Setup references to DOM
+// Setup DOM elements
 let items = undefined;
 let newItems = undefined;
-
-// Add unpersonalised video suggestions to DOM
 let newItemsHeader = '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' + newItemsTitle + '</div>';
+
+// Add loaded, unbiased video suggestions to DOM
 function addItems(results) {
-  // Create box for unpersonalised video suggestions, above usual video suggestions
-  // We add this box in this function, to separate the parsing logic from the loading logic of video suggestions
-  if (!newItems) { // assert: items !== undefined
-    items.insertAdjacentHTML('beforebegin', '<div id="newItems"></div>'); // may fail if #items does not exist yet
+  // Add container for unbiased video suggestions
+  if (!newItems) {
+    items.insertAdjacentHTML('beforebegin', '<div id="newItems"></div>');
     newItems = document.getElementById('newItems');
   }
+  newItems.innerHTML = newItemsHeader; // show title for container
 
-  // Add header for unpersonalised suggestions
-  newItems.innerHTML = newItemsHeader;
-
-  // Add amended suggestions to DOM
+  // Use Polymer library of YouTube to add all suggestions to page
   for (i = 0; i < results.length && i < maxResults; i++) {
-      var newVideo, params;
       let entry = results[i];
+      var videoElement, videoData; // Polymer library of YouTube will load videoData into videoElement
 
-      // Parse video type and create new video element
-      // TODO: Check for additional video types
+      // Fill video element and data, TODO: Check for additional video types
       if (entry.compactAutoplayRenderer) {
         entry = entry.compactAutoplayRenderer.contents[0];
       }
       if (entry.compactRadioRenderer) {
-        params = entry.compactRadioRenderer;
-        newVideo = document.createElement('ytd-compact-radio-renderer');
+        videoData = entry.compactRadioRenderer;
+        videoElement = document.createElement('ytd-compact-radio-renderer');
       }
       if (entry.compactVideoRenderer) {
-        params = entry.compactVideoRenderer;
-        newVideo = document.createElement('ytd-compact-video-renderer');
+        videoData = entry.compactVideoRenderer;
+        videoElement = document.createElement('ytd-compact-video-renderer');
       }
 
-      // Add new video element
-      if (newVideo) {        
-        newVideo.data = params;
-        newVideo.className = "style-scope ytd-watch-next-secondary-results-renderer";
-        newItems.appendChild(newVideo);
+      // Finally, add new video element
+      if (videoElement) {        
+        videoElement.data = videoData;
+        videoElement.className = "style-scope ytd-watch-next-secondary-results-renderer";
+        newItems.appendChild(videoElement);
       }
   }
 }
 
-// Hide header for unpersonalised results
-// TODO: Use display CSS property..
+// Hide header for unbiased results
 function resetItems() {
   if (newItems) {
     newItems.innerHTML = "";
   }  
 }
 
-// Load unpersonalised video suggestions
+// Load unbiased video suggestions
 function loadSuggestions(vid) {
   // Create unique URL that may be intercepted by background.js to remove cookies
   let url = new URL("https://www.youtube.com/watch");
