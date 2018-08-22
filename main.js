@@ -57,7 +57,7 @@ function monitorNavigated() {
 
     // Find biased results
     if (!items)
-        items = document.querySelector("ytd-watch #related #items");
+        items = document.querySelector("#related #items");
 
     // Assure, we have video suggestions
     if (newVid && !items) return;
