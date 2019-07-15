@@ -1,7 +1,10 @@
 // Setup DOM elements
 let items = undefined;
 let newItems = undefined;
-let newItemsHeader = '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' + newItemsTitle + '</div>';
+let newItemsHeader =
+    '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' +
+    newItemsTitle +
+    '</div>';
 
 // Add loaded, unbiased video suggestions to DOM
 function addItems(html) {
@@ -70,12 +73,10 @@ function monitorNavigated() {
     url.searchParams.append('v', vid);
 
     // Make requests, omitting cookies
-    fetch(url.href, {
-      credentials: 'omit'
-    })
-    .then(response => response.text())
-    .then(addItems)
-    .catch(error => console.log(Error));
+    fetch(url.href, {credentials: 'omit'})
+        .then(response => response.text())
+        .then(addItems)
+        .catch(console.log);
 }
 
 if (maxResults <= 0) {
