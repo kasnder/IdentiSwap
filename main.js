@@ -4,10 +4,10 @@ let newItems = undefined;
 let newItemsHeader = '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' + newItemsTitle + '</div>';
 
 // Add loaded, unbiased video suggestions to DOM
-function addItems() {
+function addItems(html) {
     // Parse JSON of video suggestions data in response
     let pattern = /window\["ytInitialData"] = (.+);\n/;
-    let raw = pattern.exec(this.responseText)[1];
+    let raw = pattern.exec(html)[1];
     let data = JSON.parse(raw);
     let results = data.contents.twoColumnWatchNextResults.secondaryResults.secondaryResults.results;
 
@@ -65,16 +65,17 @@ function monitorNavigated() {
     // Hooray, ready to load video suggestions
     vid = newVid;
 
+    // Prepare video url
     let url = new URL("https://www.youtube.com/watch");
     url.searchParams.append('v', vid);
 
-    let xhr = new XMLHttpRequest();
-    xhr.onload = addItems;
-    xhr.onerror = ev => console.log("Loading failed. " + ev.message);
-
-    // Fire request
-    xhr.open("GET", url.href + '#'); // add hash to remove cookies in background.js
-    xhr.send();
+    // Make requests, omitting cookies
+    fetch(url.href, {
+      credentials: 'omit'
+    })
+    .then(response => response.text())
+    .then(addItems)
+    .catch(error => console.log(Error));
 }
 
 if (maxResults <= 0) {
