@@ -1,21 +1,16 @@
-# IdentiSwap
-Learn about the filter bubble - Explore what others see on popular online platforms!
+# IdentiSwap - See what others see!
 
-## Overview
+This project provides a browser extension to expose the bias of YouTube's up-next recommendations.
+This tool complements the usual video recommendations with those a first-time visitor would see.
 
-This project provides a browser extension, suitable for Firefox, Chrome, and Edge. Currently, only the streaming platform YouTube is supported, where the usual video recommendations are complemented by **unpersonalised** recommendations, that a first-time visitor would see.
+To install this browser extension, just download it from the respective extension store:
+- [Firefox](https://addons.mozilla.org/de/firefox/addon/identiswap/)
+- [Chrome](https://chrome.google.com/webstore/detail/identiswap/lnpjldfnkifjhcnoiaomcgibphilpcha)
 
-## Settings
+## Technicalities
 
-On the **settings page** of the extension, a maximum number of additional results can be chosen as you like!
-
-## Motivation
-
-This is a research project into the functioning of personalised online platforms so as to demonstrate the **bias** that may be experienced.
-
-## Technical realisation
-
-When accessing a YouTube video page, the extension requests additional video recommendations from YouTube without sending the usual identifiers, such as cookies. These are then displayed seamlessly alongside the usual recommendations. During this process, the IP address of the user is not obfuscated, to allow for localisation of the recommendations and avoid ending up with recommendations in a foreign language.
+When accessing a YouTube video page, the extension requests additional video recommendations from YouTube without sending the usual identifiers, such as cookies. These are then displayed seamlessly alongside the usual recommendations. 
+Please note that platform provide may still use other means of identification, such as browser properties and the IP address.
 
 ## Rights
 
