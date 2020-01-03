@@ -73,7 +73,7 @@ function monitorNavigated() {
     url.searchParams.append('v', vid);
 
     // Make requests, omitting cookies
-    fetch(url.href, {credentials: 'omit'})
+    fetch(url.href, {credentials: 'omit', cache: 'no-store'})
         .then(response => response.text())
         .then(addItems)
         .catch(console.log);
