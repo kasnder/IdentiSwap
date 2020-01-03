@@ -3,6 +3,12 @@
 This project provides a browser extension to expose the bias of YouTube's up-next recommendations.
 This tool complements the usual video recommendations with those a first-time visitor would see.
 
+<p align="center">
+  <img alt="IdentiSwap Logo" src="icons/swap-512.png" style="display: block; margin: 0 auto;" height="100%" width="200" >
+</p>
+
+## Setup
+
 To install this browser extension, just download it from the respective extension store:
 - [Firefox](https://addons.mozilla.org/de/firefox/addon/identiswap/)
 - [Chrome](https://chrome.google.com/webstore/detail/identiswap/lnpjldfnkifjhcnoiaomcgibphilpcha)
