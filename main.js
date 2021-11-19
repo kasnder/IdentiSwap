@@ -9,7 +9,7 @@ let newItemsHeader =
 // Add loaded, unbiased video suggestions to DOM
 function addItems(html) {
     // Parse JSON of video suggestions data in response
-    let pattern = /window\["ytInitialData"] = (.+);\n/;
+    let pattern = /var ytInitialData = ({.*?});\n?/;
     let raw = pattern.exec(html)[1];
     let data = JSON.parse(raw);
     let results = data.contents.twoColumnWatchNextResults.secondaryResults.secondaryResults.results;
