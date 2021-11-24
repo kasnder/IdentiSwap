@@ -5,6 +5,10 @@ let newItemsHeader =
     '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' +
     newItemsTitle +
     '</div>';
+let newItemsFooter =
+    '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' +
+    oldItemsTitle +
+    '</div>';
 
 // Add loaded, unbiased video suggestions to DOM
 function addItems(html) {
@@ -46,6 +50,8 @@ function addItems(html) {
             newItems.appendChild(videoElement);
         }
     }
+
+    newItems.insertAdjacentHTML('beforeend', newItemsFooter);
 }
 
 let vid = null; // keep track of current video ID

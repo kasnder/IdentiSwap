@@ -6,5 +6,9 @@
   "newItemsTitle": {
     "message": "Vorschläge eines Erst-Besuchers",
     "description": "Header of the unpersonalised video suggestions."
+  },
+  "oldItemsTitle": {
+    "message": "Normale Vorschläge",
+    "description": "Header of the unpersonalised video suggestions."
   }
 }

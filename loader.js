@@ -7,8 +7,9 @@ chrome.storage.local.get(['maxresults'], function (result) {
     }
 
     // Inject maxResults + localisation into main.js
-    let newItemsTitle = chrome.i18n.getMessage("newItemsTitle"); // provides localisation
-    let actualCode = `let maxResults = ${maxResults}; let newItemsTitle = "${newItemsTitle}";`;
+    let newItemsTitle = chrome.i18n.getMessage("newItemsTitle");
+    let oldItemsTitle = chrome.i18n.getMessage("oldItemsTitle");
+    let actualCode = `let maxResults = ${maxResults}; let newItemsTitle = "${newItemsTitle}"; let oldItemsTitle = "${oldItemsTitle}";`;
     let script = document.createElement('script');
     script.textContent = actualCode;
     (document.head || document.documentElement).appendChild(script);
