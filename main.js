@@ -1,14 +1,29 @@
+const maxResults = 5;
+const newItemsTitle = 'Suggestions of First-time Visitors';
+const oldItemsTitle = 'Usual Suggestions';
+
 // Setup DOM elements
 let items = undefined;
 let newItems = undefined;
-let newItemsHeader =
-    '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' +
-    newItemsTitle +
-    '</div>';
-let newItemsFooter =
-    '<div id="upnext" class="ytd-compact-autoplay-renderer" style="padding-bottom: 12px;">' +
-    oldItemsTitle +
-    '</div>';
+
+// Create new items header and footer dynamically
+function createNewItemsHeader(title) {
+    const headerDiv = document.createElement('div');
+    headerDiv.id = 'upnext';
+    headerDiv.className = 'ytd-compact-autoplay-renderer';
+    headerDiv.style.paddingBottom = '12px';
+    headerDiv.textContent = title;
+    return headerDiv;
+}
+
+function createNewItemsFooter(title) {
+    const footerDiv = document.createElement('div');
+    footerDiv.id = 'upnext';
+    footerDiv.className = 'ytd-compact-autoplay-renderer';
+    footerDiv.style.paddingBottom = '12px';
+    footerDiv.textContent = title;
+    return footerDiv;
+}
 
 // Add loaded, unbiased video suggestions to DOM
 function addItems(html) {
@@ -20,15 +35,27 @@ function addItems(html) {
 
     // Add container for unbiased video suggestions
     if (!newItems) {
-        items.insertAdjacentHTML('beforebegin', '<div id="newItems"></div>');
+        const newDiv = document.createElement('div');
+        newDiv.id = 'newItems';
+        items.parentNode.insertBefore(newDiv, items);
         newItems = document.getElementById('newItems');
     }
-    newItems.innerHTML = newItemsHeader; // show title for container
+
+    // Clear existing content
+    newItems.replaceChildren();
+
+    // Create and append the header
+    const headerDiv = document.createElement('div');
+    headerDiv.id = 'upnext';
+    headerDiv.className = 'ytd-compact-autoplay-renderer';
+    headerDiv.style.paddingBottom = '12px';
+    headerDiv.innerText = newItemsTitle;
+    newItems.appendChild(headerDiv);
 
     // Use Polymer library of YouTube to add all suggestions to page
-    for (i = 0; i < results.length && i < maxResults; i++) {
+    for (let i = 0; i < results.length && i < maxResults; i++) {
         let entry = results[i];
-        let videoElement, videoData; // Polymer library of YouTube will load videoData into videoElement
+        let videoElement, videoData;
 
         // Fill video element and data
         if (entry.compactAutoplayRenderer) {
@@ -51,14 +78,20 @@ function addItems(html) {
         }
     }
 
-    newItems.insertAdjacentHTML('beforeend', newItemsFooter);
+    // Create and append the footer
+    const footerDiv = document.createElement('div');
+    footerDiv.id = 'upnext';
+    footerDiv.className = 'ytd-compact-autoplay-renderer';
+    footerDiv.style.paddingBottom = '12px';
+    footerDiv.innerText = oldItemsTitle;
+    newItems.appendChild(footerDiv);
 }
 
 let vid = null; // keep track of current video ID
 function monitorNavigated() {
     // Hide unbiased results
     if (newItems)
-        newItems.innerHTML = "";
+        newItems.replaceChildren();
 
     // Check if on new video page
     newVid = (new URL(location)).searchParams.get('v');

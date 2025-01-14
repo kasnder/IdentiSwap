@@ -1,24 +1,5 @@
-// Load maxResults setting
-chrome.storage.local.get(['maxresults'], function (result) {
-    // Check if loading successful, else use fallback
-    let maxResults = 5;
-    if (result.maxresults) {
-        maxResults = parseInt(result.maxresults);
-    }
-
-    // Inject maxResults + localisation into main.js
-    let newItemsTitle = chrome.i18n.getMessage("newItemsTitle");
-    let oldItemsTitle = chrome.i18n.getMessage("oldItemsTitle");
-    let actualCode = `let maxResults = ${maxResults}; let newItemsTitle = "${newItemsTitle}"; let oldItemsTitle = "${oldItemsTitle}";`;
-    let script = document.createElement('script');
-    script.textContent = actualCode;
-    (document.head || document.documentElement).appendChild(script);
-    script.remove();
-
-    // Inject main.js into YouTube page
-    // This is required to interact with YouTube's Polymere and display video suggestions nicely
-    script = document.createElement('script');
-    script.src = chrome.extension.getURL('main.js');
-    (document.head || document.documentElement).appendChild(script);
-    script.remove();
-});
+// Inject main.js into YouTube page
+const s = document.createElement('script');
+s.src = chrome.runtime.getURL('main.js');
+s.onload = () => s.remove();
+(document.head || document.documentElement).append(s);
