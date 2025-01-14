@@ -29,5 +29,11 @@
       "resources": ["main.js"],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{1ab60165-205f-440d-bccc-4082aa49a0fc}",
+      "strict_min_version": "58.0"
+    }
+  }
 }
